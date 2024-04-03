@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import CloseIcon from "@mui/icons-material/Close";
+import { useSelector } from "react-redux";
+import { selectCars } from "../features/car/carSlice";
 
 function Header() {
   const [burgerStatus, setburgerStatus] = useState(false);
+  const cars = useSelector(selectCars);
+  console.log(cars);
 
   return (
     <Container>
@@ -12,10 +16,12 @@ function Header() {
         <img src="/images-20240330T174417Z-001/images/logo.svg" alt="Logo" />
       </a>
       <Menu>
-        <a href="#">Model S</a>
-        <a href="#">Model 3</a>
-        <a href="#">Model X</a>
-        <a href="#">Model Y</a>
+        {cars &&
+          cars.map((car, index) => (
+            <a key={index} href="#">
+              {car}
+            </a>
+          ))}
       </Menu>
       <RightMenu>
         <a href="#">Shop</a>
@@ -26,6 +32,14 @@ function Header() {
         <CloseWrapper>
           <CustomCloseBtn onClick={() => setburgerStatus(false)} />
         </CloseWrapper>
+        {cars &&
+          cars.map((car, index) => (
+            <li>
+              <a key={index} href="#">
+                {car}
+              </a>
+            </li>
+          ))}
         <li>
           <a href="#">Existing Inventory</a>
         </li>
@@ -42,22 +56,10 @@ function Header() {
           <a href="#">Roadster</a>
         </li>
         <li>
-          <a href="#">Existing Inventory</a>
+          <a href="#">Lowest Cost Solar Panel in USA</a>
         </li>
         <li>
-          <a href="#">Existing Inventory</a>
-        </li>
-        <li>
-          <a href="#">Existing Inventory</a>
-        </li>
-        <li>
-          <a href="#">Existing Inventory</a>
-        </li>
-        <li>
-          <a href="#">Existing Inventory</a>
-        </li>
-        <li>
-          <a href="#">Existing Inventory</a>
+          <a href="#">Solar for New Roof</a>
         </li>
       </BurgerNav>
     </Container>

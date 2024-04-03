@@ -1,17 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import carReducer from "../features/car/carSlice";
+import carReducer from "../src/features/car/carSlice";
+// import carSlice from "./features/car/carSlice";
 
-// Custom middleware for logging actions
-const logger = (storeAPI) => (next) => (action) => {
-  console.log("dispatching", action);
-  let result = next(action);
-  console.log("next state", storeAPI.getState());
-  return result;
-};
-
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     car: carReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
+
+export default store;
